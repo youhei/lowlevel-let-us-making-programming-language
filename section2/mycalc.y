@@ -11,39 +11,39 @@
 %token ADD SUB MUL DIV CR
 %type <double_value> expression term primary_expression
 %%
-line_list
-  : line
-  | line_list line
+line_list /* 「行並び」とは... */
+  : line  /* (ひとつの)行、 */
+  | line_list line  /* または、「行並び」の後ろに「行」を並べたもの。 */
   ;
-line
-  : expression CR
+line  /* 「行」とは... */
+  : expression CR /* 式の後ろに改行を入れたもの。 */
   {
     printf(">>%lf\n", $1);
   }
-expression
-  : term
-  | expression ADD term
+expression  /* 「式」とは... */
+  : term  /* 「項」、 */
+  | expression ADD term   /* または、「式」+「項」 */
   {
     $$ = $1 + $3;
   }
-  | expression SUB term
+  | expression SUB term   /* または、「式」-「項」 */
   {
     $$ = $1 - $3;
   }
   ;
-term
-  : primary_expression
-  | term MUL primary_expression
+term  /* 「項」とは、 */
+  : primary_expression  /* 「一次式」、*/
+  | term MUL primary_expression   /* または、「項」*「一次式」 */
   {
     $$ = $1 * $3;
   }
-  | term DIV primary_expression
+  | term DIV primary_expression   /* または、「項」/「一次式」 */
   {
     $$ = $1 / $3;
   }
   ;
-primary_expression
-  : DOUBLE_LITERAL
+primary_expression  /* 「一次式」とは */
+  : DOUBLE_LITERAL  /* 実数のリテラル */
   ;
 %%
 int
