@@ -20,6 +20,11 @@ line  /* 「行」とは... */
   {
     printf(">>%lf\n", $1);
   }
+  | error CR
+  {
+    yyclearin;
+    yyerrok;
+  }
 expression  /* 「式」とは... */
   : term  /* 「項」、 */
   | expression ADD term   /* または、「式」+「項」 */
