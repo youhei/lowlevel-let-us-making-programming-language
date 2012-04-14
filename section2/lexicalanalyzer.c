@@ -50,7 +50,7 @@ get_token(Token *token)
     if (current_char == '+') {
       token->kind = ADD_OPERATOR_TOKEN;
       return;
-    } else if (current_char = '-') {
+    } else if (current_char == '-') {
       token->kind = SUB_OPERATOR_TOKEN;
       return;
     } else if (current_char == '*') {
